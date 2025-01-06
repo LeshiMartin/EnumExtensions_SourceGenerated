@@ -34,7 +34,8 @@ internal static class Extensions
 
         var docSb = new StringBuilder()
             .AppendLine("/// <summary>")
-            .AppendLine("/// Gets the name of the enum <paramref name=\"source\" /> for:");
+            .AppendLine("/// Gets the name of the enum <paramref name=\"source\" /> for:")
+            .AppendLine("/// <c>");
         var methodSb = new StringBuilder();
         methodSb.AppendLine(
             $$"""
@@ -47,14 +48,16 @@ internal static class Extensions
         {
             var memberName = member.Identifier.ToString();
             var stringRep = member.GetDesiredMemberName(memberName);
-            docSb.AppendLine($"/// <li> <see cref=\"{enumName}.{memberName}\"/> returns {stringRep} ;</li>");
+            docSb.AppendLine($"/// <br /> <see cref=\"{enumName}.{memberName}\"/>  => {stringRep} ;");
             methodSb.AppendLine($"       {enumName}.{memberName} => \"{stringRep}\",");
         }
 
         methodSb
             .AppendLine("        _ => throw new ArgumentOutOfRangeException()")
             .AppendLine("     };");
-        docSb.AppendLine("///</summary>")
+        docSb
+        .AppendLine("///</c>")
+        .AppendLine("///</summary>")
             .AppendLine("///<param name=\"source\">The enum from which the name will be retrieved</param>")
             .AppendLine(
                 "/// <exception cref=\"ArgumentOutOfRangeException\"> if <paramref name=\"source\" /> cannot be matched </exception>")
@@ -69,7 +72,8 @@ internal static class Extensions
 
         var docSb = new StringBuilder()
             .AppendLine("/// <summary>")
-            .AppendLine("/// Gets the description of the enum <paramref name=\"source\" /> for:");
+            .AppendLine("/// Gets the description of the enum <paramref name=\"source\" /> for:")
+            .AppendLine("/// <c>");
         var methodSb = new StringBuilder();
         methodSb.AppendLine(
             $$"""
@@ -82,14 +86,16 @@ internal static class Extensions
         {
             var memberName = member.Identifier.ToString();
             var stringRep = member.GetDesiredMemberDescription(memberName);
-            docSb.AppendLine($"/// <li> <see cref=\"{enumName}.{memberName}\"/> returns {stringRep} ;</li>");
+            docSb.AppendLine($"/// <br /> <see cref=\"{enumName}.{memberName}\"/> => {stringRep} ;");
             methodSb.AppendLine($"       {enumName}.{memberName} => \"{stringRep}\",");
         }
 
         methodSb
             .AppendLine("        _ => throw new ArgumentOutOfRangeException()")
             .AppendLine("     };");
-        docSb.AppendLine("///</summary>")
+        docSb
+            .AppendLine("///</c>")
+            .AppendLine("///</summary>")
             .AppendLine("///<param name=\"source\">The enum from which the description will be retrieved</param>")
             .AppendLine(
                 "/// <exception cref=\"ArgumentOutOfRangeException\"> if <paramref name=\"source\" /> cannot be matched </exception>")
@@ -106,6 +112,8 @@ internal static class Extensions
 
     private static string GetDesiredMemberDescription(this EnumMemberDeclarationSyntax member, string memberName)
     {
+        if (!member.HasAttribute(nameof(EnumDescription)))
+            return memberName;
         var attributeSyntax = member.GetAttributeSyntax(nameof(EnumDescription));
         var argument = attributeSyntax?.ArgumentList?.Arguments.FirstOrDefault();
         if (argument?.Expression is LiteralExpressionSyntax literalExpressionSyntax)
@@ -115,6 +123,8 @@ internal static class Extensions
 
     private static string GetDesiredMemberName(this EnumMemberDeclarationSyntax member, string memberName)
     {
+        if (!member.HasAttribute(nameof(EnumName)))
+            return memberName;
         var attributeSyntax = member.GetAttributeSyntax(nameof(EnumName));
         var argument = attributeSyntax?.ArgumentList?.Arguments.FirstOrDefault();
         if (argument?.Expression is LiteralExpressionSyntax literalExpressionSyntax)
