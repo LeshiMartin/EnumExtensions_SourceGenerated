@@ -12,7 +12,7 @@ public class Tests
     [InlineData(SimpleEnum.Four, "Cetiri")]
     [InlineData(SimpleEnum.None, "None")]
     public void GetName_Tests(SimpleEnum @enum, string expectedName)
-    => @enum.GetName().Should().Be(expectedName);
+        => @enum.GetName().Should().Be(expectedName);
 
     [Theory]
     [InlineData(SimpleEnum.One, "One")]
@@ -23,4 +23,17 @@ public class Tests
     public void GetDescription_Tests(SimpleEnum @enum, string expectedDescription)
         => @enum.GetDescription().Should().Be(expectedDescription);
 
+    [Fact]
+    public void GetValue_Tests()
+    {
+        var value = SimpleEnumHelper.GetMaxValue();
+        value.Should().Be((int)SimpleEnum.Four);
+    }
+
+    [Fact]
+    public void GetNames_Tests()
+    {
+        var names = SimpleEnumHelper.GetNames();
+        names.Should().NotBeEmpty();
+    }
 }

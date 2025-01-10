@@ -27,6 +27,9 @@ internal static class Extensions
             _ => fallBackValue
         };
 
+    public static string GetBaseType(this EnumDeclarationSyntax @enum)
+        => @enum.BaseList is null ? "int" : @enum.BaseList.Types.First().ToString();
+
 
     public static string GetNameMethod(this EnumDeclarationSyntax @enum)
     {
@@ -121,7 +124,7 @@ internal static class Extensions
         return memberName;
     }
 
-    private static string GetDesiredMemberName(this EnumMemberDeclarationSyntax member, string memberName)
+    public static string GetDesiredMemberName(this EnumMemberDeclarationSyntax member, string memberName)
     {
         if (!member.HasAttribute(nameof(EnumName)))
             return memberName;

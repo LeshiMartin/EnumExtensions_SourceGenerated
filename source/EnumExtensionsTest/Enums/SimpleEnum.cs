@@ -9,7 +9,19 @@ public enum SimpleEnum
     One,
     Two,
     Three,
-    [EnumName("Cetiri")]
-    [EnumDescription("SimpleDescription")]
-    Four,
+
+    [EnumName("Cetiri"), EnumDescription("SimpleDescription")]
+    Four
+}
+
+[EnumExtensions, Flags]
+public enum SimpleByteEnum : byte
+{
+    None,
+    One,
+    Two,
+    Three,
+
+    [EnumName("Cetiri"), EnumDescription("SimpleDescription")]
+    Four
 }
