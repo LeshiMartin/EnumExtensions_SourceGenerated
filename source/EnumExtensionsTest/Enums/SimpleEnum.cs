@@ -14,7 +14,7 @@ public enum SimpleEnum
     Four
 }
 
-[EnumExtensions, Flags]
+[EnumExtensions]
 public enum SimpleByteEnum : byte
 {
     None,
@@ -23,5 +23,19 @@ public enum SimpleByteEnum : byte
     Three,
 
     [EnumName("Cetiri"), EnumDescription("SimpleDescription")]
-    Four
+    Four,
+}
+
+[EnumExtensions, Flags]
+public enum FlagEnum
+{
+    None,
+    First,
+    Second,
+    Third = 4,
+    Fourth = 8,
+    TwoAndThree = Second | Third,
+    OneAndTwo = First | Second,
+    TwoAndFour = Second | Fourth,
+    All = First | Second | Third | Fourth,
 }

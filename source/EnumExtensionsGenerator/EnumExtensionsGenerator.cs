@@ -310,7 +310,7 @@ public class EnumExtensionsGenerator : IIncrementalGenerator
                 /// <c>true</c> if <paramref name="source"/>  contains <paramref name="other"/> otherwise <c>false</c>
                 /// </returns>
                 public static bool ContainsFlag(this {enumName} source, {enumName} other)
-                   => (source & other) != 0;
+                   => (source & other) == other;
                 """;
     }
 }
