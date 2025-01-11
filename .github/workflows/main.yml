@@ -3,7 +3,7 @@ name: .NET CI/CD Package EnumExtensions
 on: 
   push:
     branches:
-      - publish #only on publish should this fire
+      - master #only on publish should this fire
 
 jobs:
   build:
