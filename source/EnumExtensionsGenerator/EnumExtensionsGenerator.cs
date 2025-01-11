@@ -182,22 +182,22 @@ public class EnumExtensionsGenerator : IIncrementalGenerator
         var body1 = @enum.Members
             .Select(x => (x.GetDesiredMemberName(x.Identifier.ValueText), $"{enumName}.{x.Identifier.ValueText}"))
             .Select(x => $"             \"{x.Item1}\" => {x.Item2},\n")
-            .Aggregate(" value switch \n        {\n ", (x, y) => x + $"{y}");
+            .Aggregate(" value switch \n         {\n", (x, y) => x + $"{y}");
 
         var body2 = @enum.Members
             .Select(x => (x.Identifier.ValueText, $"{enumName}.{x.Identifier.ValueText}"))
-            .Select(x => $"             \"{x.Item1}\" => {x.Item2},\n")
-            .Aggregate(" value switch \n       {\n ", (x, y) => x + $"{y}");
+            .Select(x => $"            \"{x.Item1}\" => {x.Item2},\n")
+            .Aggregate(" value switch \n         {\n", (x, y) => x + $"{y}");
 
         var end = """
-                                _ => throw new ArgumentOutOfRangeException()
-                         }
+                               _ => throw new ArgumentOutOfRangeException()
+                            }
                   """;
         return
             $"""
              {start} respectAttribute
-                 ? {body1}{end}
-                 : {body2}{end};
+                     ? {body1}{end}
+                     : {body2}{end};
              """;
     }
 

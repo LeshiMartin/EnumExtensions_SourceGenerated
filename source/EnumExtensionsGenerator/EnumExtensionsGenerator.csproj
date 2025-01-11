@@ -6,6 +6,12 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<PackageId>EnumExtensionSourceGenerated</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Martin Leshi</Authors>
+		<Company>Martin Leshi</Company>
+		<Product>EnumExtensions</Product>
+		<Description>Generates extensions for enums based on the attributes</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
