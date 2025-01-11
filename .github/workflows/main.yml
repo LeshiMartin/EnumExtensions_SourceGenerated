@@ -1,0 +1,37 @@
+name: .NET CI/CD Package EnumExtensions
+
+on: 
+  push:
+    branches:
+      - publish #only on publish should this fire
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # The vm on which this job should run
+
+    steps:
+     - name: Checkout Repo # First we checkout the repo
+       uses: actions/checkout@v4
+
+     - name: Setup .NET
+       uses: actions/setup-dotnet@v3
+       with:
+         dotnet-version: '9.0.0'
+
+     - name: Restore Dependencies
+       run: dotnet restore 
+
+     - name: Build Project
+       run: dotnet build --configuration Release --no-restore
+
+     - name: Run Tests
+       run: dotnet test --no-restore --verbosity normal
+
+     - name: Pack Nuget Package
+       run: dotnet pack --configuration Release --output nupkg
+
+     - name: Upload Nuget Package as Artifact
+       uses: actions/upload-artifact@v4
+       with:
+         name: nuget-package
+         path: nupkg/*.nupkg
