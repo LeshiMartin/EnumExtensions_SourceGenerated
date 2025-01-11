@@ -137,7 +137,6 @@ public class EnumExtensionsGenerator : IIncrementalGenerator
                           /// It will return an IReadOnlyCollection from the names from {{enumName}}
                           /// </summary>
                           /// <param name="respectAttribute"> if <c>true</c> than it will return the values with the desired attribute name </param>
-                          /// <remarks> It will call <see cref="GeneratedEnumExtensions.GetName" /> for each Member </remarks>
                           /// <returns> <see cref="IReadOnlyCollection{T}"/> </returns>
                           public static IReadOnlyCollection<string> GetNames(bool respectAttribute = false)
                            =>
