@@ -13,7 +13,11 @@
 		<Company>Martin Leshi</Company>
 		<Product>EnumExtensions</Product>
 		<Description>Generates extensions for enums based on the attributes</Description>
-
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/LeshiMartin/EnumExtensions_SourceGenerated</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<ProjectUrl>https://github.com/LeshiMartin/EnumExtensions_SourceGenerated</ProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
